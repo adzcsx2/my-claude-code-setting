@@ -23,9 +23,17 @@ rad.json
 TestResults.xml
 
 ### Claude local state / cache ###
-# Keep portable content such as `skills/`, `hooks/`, `scripts/`,
+# Keep portable content such as `skills/my/`, `hooks/`, `scripts/`,
 # and marketplace plugin sources. Ignore only machine-specific
 # runtime state, caches, logs, and disposable artifacts.
+
+# Plugin-generated / external skills (ECC, DWS, Android tools, etc.) -
+# regenerated on each machine, not portable user content
+skills/ecc/
+skills/dws/
+skills/android-dev-tools/
+skills/android-device-automation
+skills/apply-remote-sign
 
 # Plugin-generated commands (ECC, dev-tools-skills, etc.) -
 # regenerated on each machine, not portable source
