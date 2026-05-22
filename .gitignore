@@ -23,9 +23,13 @@ rad.json
 TestResults.xml
 
 ### Claude local state / cache ###
-# Keep portable content such as `ecc/`, `commands/`, `skills/`, `hooks/`,
-# `scripts/`, and marketplace plugin sources. Ignore only machine-
-# specific runtime state, caches, logs, and disposable artifacts.
+# Keep portable content such as `skills/`, `hooks/`, `scripts/`,
+# and marketplace plugin sources. Ignore only machine-specific
+# runtime state, caches, logs, and disposable artifacts.
+
+# Plugin-generated commands (ECC, dev-tools-skills, etc.) -
+# regenerated on each machine, not portable source
+commands/
 # plans/ may contain sensitive credentials and is excluded from version control
 plans/
 # settings.json contains API keys and other secrets
