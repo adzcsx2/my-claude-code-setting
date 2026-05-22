@@ -36,6 +36,29 @@ settings.json
 history.jsonl
 stats-cache.json
 settings.local.json
+*.log
+
+# Machine-specific state that leaks local paths and install topology
+ecc/install-state.json
+homunculus/projects.json
+
+# Local MCP overrides and private credentials
+mcp-configs/**/*.local.json
+mcp-configs/private/
+
+# Secret-bearing local environment and certificate files
+.env
+.env.*
+!.env.example
+!.env.template
+!.env.sample
+!.env.test.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
 
 # Local runtime and generated state
 backups/
