@@ -21,3 +21,37 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+
+### Claude local state / cache ###
+# Keep portable content such as `ecc/`, `commands/`, `skills/`, `hooks/`,
+# `scripts/`, and marketplace plugin sources. Ignore only machine-
+# specific runtime state, caches, logs, and disposable artifacts.
+# plans/ may contain sensitive credentials and is excluded from version control
+plans/
+.DS_Store
+.agents/
+.last-cleanup
+history.jsonl
+stats-cache.json
+settings.local.json
+
+# Local runtime and generated state
+backups/
+debug/
+file-history/
+metrics/
+paste-cache/
+projects/
+session-env/
+sessions/
+shell-snapshots/
+state/
+ide/
+tasks/
+todos/
+
+# Plugin local data only; keep cache content tracked for portable plugin skills
+plugins/.DS_Store
+plugins/data/
+plugins/install-counts-cache.json
+plugins/installed_plugins.json

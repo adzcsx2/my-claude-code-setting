@@ -1,0 +1,442 @@
+{
+  "1d329d7393df": {
+    "id": "1d329d7393df",
+    "name": "everything-claude-code",
+    "root": "/Users/hoyn/Documents/github/everything-claude-code",
+    "remote": "https://github.com/affaan-m/everything-claude-code.git",
+    "created_at": "2026-03-18T02:02:55.231151Z",
+    "last_seen": "2026-03-18T05:27:23.222087Z"
+  },
+  "120582b9b34f": {
+    "id": "120582b9b34f",
+    "name": "VDAO_vtalkandroid",
+    "root": "/Users/hoyn/Documents/AndroidWorkplace/VDAO_vtalkandroid",
+    "remote": "git@gitee.com:chengdu-xiaochen/vtalkandroid.git",
+    "created_at": "2026-03-18T05:45:42.256824Z",
+    "last_seen": "2026-04-10T01:26:26.062937Z"
+  },
+  "dfa4780b124e": {
+    "id": "dfa4780b124e",
+    "name": "claude",
+    "root": "/Users/hoyn/Documents/claude",
+    "remote": "",
+    "created_at": "2026-03-18T05:46:29.258778Z",
+    "last_seen": "2026-03-30T09:31:30.326330Z"
+  },
+  "b6c1cabd488f": {
+    "id": "b6c1cabd488f",
+    "name": "hoyn",
+    "root": "/Users/hoyn",
+    "remote": "",
+    "created_at": "2026-03-18T07:27:24.058629Z",
+    "last_seen": "2026-04-01T09:14:27.229677Z"
+  },
+  "3e36fdc68bf3": {
+    "id": "3e36fdc68bf3",
+    "name": ".idea",
+    "root": "/Users/hoyn/Documents/AndroidWorkplace/VDAO_vtalkandroid/.idea",
+    "remote": "",
+    "created_at": "2026-03-18T07:39:00.681548Z",
+    "last_seen": "2026-03-18T07:39:47.571425Z"
+  },
+  "aab1f10900b7": {
+    "id": "aab1f10900b7",
+    "name": "proto",
+    "root": "/Users/hoyn/Documents/AndroidWorkplace/VDAO_vtalkandroid/business/proto",
+    "remote": "",
+    "created_at": "2026-03-18T07:39:17.231285Z",
+    "last_seen": "2026-03-18T07:39:40.987380Z"
+  },
+  "1b63620f411b": {
+    "id": "1b63620f411b",
+    "name": "generated",
+    "root": "/Users/hoyn/Documents/AndroidWorkplace/VDAO_vtalkandroid/business/proto/build/generated",
+    "remote": "",
+    "created_at": "2026-03-18T07:39:46.829359Z",
+    "last_seen": "2026-03-18T07:39:46.829359Z"
+  },
+  "b1a4d2d9550a": {
+    "id": "b1a4d2d9550a",
+    "name": "common-lib",
+    "root": "/Users/hoyn/Documents/AndroidWorkplace/common-lib",
+    "remote": "git@github.com:adzcsx2/android-common-lib.git",
+    "created_at": "2026-03-18T08:34:06.925422Z",
+    "last_seen": "2026-04-13T07:08:20.547547Z"
+  },
+  "c95617dce25f": {
+    "id": "c95617dce25f",
+    "name": "learned",
+    "root": "/Users/hoyn/.claude/skills/learned",
+    "remote": "",
+    "created_at": "2026-03-19T01:44:31.033650Z",
+    "last_seen": "2026-03-19T03:14:32.169969Z"
+  },
+  "40e646cb1cdf": {
+    "id": "40e646cb1cdf",
+    "name": "Users-hoyn-Documents-AndroidWorkplace-common-lib",
+    "root": "/Users/hoyn/.cursor/projects/Users-hoyn-Documents-AndroidWorkplace-common-lib",
+    "remote": "",
+    "created_at": "2026-03-19T02:15:21.431336Z",
+    "last_seen": "2026-03-19T02:15:21.733371Z"
+  },
+  "df3f5b723cdb": {
+    "id": "df3f5b723cdb",
+    "name": "android_claude_skill",
+    "root": "/Users/hoyn/Documents/github/android_claude_skill",
+    "remote": "git@github.com:adzcsx2/android-claude-skills.git",
+    "created_at": "2026-03-19T03:15:18.215254Z",
+    "last_seen": "2026-04-14T10:24:55.944006Z"
+  },
+  "b7a996e4d8bf": {
+    "id": "b7a996e4d8bf",
+    "name": "Documents",
+    "root": "/Users/hoyn/Documents",
+    "remote": "",
+    "created_at": "2026-03-19T04:14:41.600630Z",
+    "last_seen": "2026-03-19T04:14:41.600630Z"
+  },
+  "65d11b2cdce2": {
+    "id": "65d11b2cdce2",
+    "name": "ai-camera-meta",
+    "root": "/Users/hoyn/Documents/AndroidWorkplace/ai-camera-meta",
+    "remote": "git@gitee.com:chengdu-xiaochen/ai-camera-meta.git",
+    "created_at": "2026-03-19T07:12:11.734225Z",
+    "last_seen": "2026-03-31T06:12:26.079662Z"
+  },
+  "2d725a72856e": {
+    "id": "2d725a72856e",
+    "name": "Appmyvertu3.0_Old",
+    "root": "/Users/hoyn/Documents/AndroidWorkplace/Appmyvertu3.0_Old",
+    "remote": "git@gitee.com:chengdu-xiaochen/Appmyvertu3.0_Old.git",
+    "created_at": "2026-03-20T03:18:26.714335Z",
+    "last_seen": "2026-03-20T05:35:11.403990Z"
+  },
+  "a292f3801087": {
+    "id": "a292f3801087",
+    "name": "init-android",
+    "root": "/Users/hoyn/Documents/github/claude_skill/plugins/android-dev-tools/skills/init-android",
+    "remote": "",
+    "created_at": "2026-03-20T05:27:36.312114Z",
+    "last_seen": "2026-03-20T08:46:22.562125Z"
+  },
+  "1ca51321075a": {
+    "id": "1ca51321075a",
+    "name": "AndroidWorkplace",
+    "root": "/Users/hoyn/Documents/AndroidWorkplace",
+    "remote": "",
+    "created_at": "2026-03-20T05:40:08.303514Z",
+    "last_seen": "2026-04-08T09:56:17.467895Z"
+  },
+  "35b57e56228c": {
+    "id": "35b57e56228c",
+    "name": "Downloads",
+    "root": "/Users/hoyn/Downloads",
+    "remote": "",
+    "created_at": "2026-03-23T06:54:41.489045Z",
+    "last_seen": "2026-04-08T09:09:27.831424Z"
+  },
+  "05c68ee4ddfb": {
+    "id": "05c68ee4ddfb",
+    "name": "value-android",
+    "root": "/Users/hoyn/Documents/AndroidWorkplace/value-android",
+    "remote": "git@gitee.com:chengdu-xiaochen/value-android.git",
+    "created_at": "2026-03-23T09:04:44.981273Z",
+    "last_seen": "2026-03-26T09:47:11.043537Z"
+  },
+  "53a9bfed17ec": {
+    "id": "53a9bfed17ec",
+    "name": "android",
+    "root": "/Users/hoyn/Documents/AndroidWorkplace/life-flutter/android",
+    "remote": "",
+    "created_at": "2026-03-23T09:49:47.424184Z",
+    "last_seen": "2026-03-23T10:31:37.466226Z"
+  },
+  "bca61d6689f5": {
+    "id": "bca61d6689f5",
+    "name": "appstore-android",
+    "root": "/Users/hoyn/Documents/AndroidWorkplace/appstore-android",
+    "remote": "git@gitee.com:chengdu-xiaochen/appstore-android.git",
+    "created_at": "2026-03-25T05:06:04.207323Z",
+    "last_seen": "2026-03-25T05:06:05.674912Z"
+  },
+  "67349ede3a3d": {
+    "id": "67349ede3a3d",
+    "name": "vshot-android",
+    "root": "/Users/hoyn/Documents/AndroidWorkplace/vshot-android",
+    "remote": "git@gitee.com:chengdu-xiaochen/vshot-android.git",
+    "created_at": "2026-03-26T05:23:42.288304Z",
+    "last_seen": "2026-03-26T08:30:56.103861Z"
+  },
+  "f7db377df1ef": {
+    "id": "f7db377df1ef",
+    "name": "github_auto_farm",
+    "root": "/Users/hoyn/Documents/github/github_auto_farm",
+    "remote": "https://github.com/kask001/github_nick_kask.git",
+    "created_at": "2026-03-30T02:57:31.595346Z",
+    "last_seen": "2026-04-10T05:28:21.646590Z"
+  },
+  "e42a38407c71": {
+    "id": "e42a38407c71",
+    "name": "src",
+    "root": "/Users/hoyn/Documents/github/github_auto_farm/src",
+    "remote": "",
+    "created_at": "2026-03-30T03:55:14.092498Z",
+    "last_seen": "2026-03-30T05:10:37.435507Z"
+  },
+  "610df0fca2ce": {
+    "id": "610df0fca2ce",
+    "name": "lib",
+    "root": "/Users/hoyn/Documents/AndroidWorkplace/common-lib/app_scanner/src/main/java/com/hoyn/common/lib",
+    "remote": "",
+    "created_at": "2026-03-30T06:56:01.678158Z",
+    "last_seen": "2026-03-30T06:56:01.799557Z"
+  },
+  "4e6880c450ee": {
+    "id": "4e6880c450ee",
+    "name": "layout",
+    "root": "/Users/hoyn/Documents/AndroidWorkplace/common-lib/app_scanner/src/main/res/layout",
+    "remote": "",
+    "created_at": "2026-03-30T06:56:01.942081Z",
+    "last_seen": "2026-03-30T06:56:02.052258Z"
+  },
+  "19cc9a622824": {
+    "id": "19cc9a622824",
+    "name": "lib",
+    "root": "/Users/hoyn/Documents/AndroidWorkplace/common-lib/app_scanner/src/test/java/com/hoyn/common/lib",
+    "remote": "",
+    "created_at": "2026-03-30T06:56:02.191702Z",
+    "last_seen": "2026-03-30T06:56:02.308531Z"
+  },
+  "2ab4db0fe5a5": {
+    "id": "2ab4db0fe5a5",
+    "name": "lib",
+    "root": "/Users/hoyn/Documents/AndroidWorkplace/common-lib/app_scanner/src/androidTest/java/com/hoyn/common/lib",
+    "remote": "",
+    "created_at": "2026-03-30T06:56:02.446066Z",
+    "last_seen": "2026-03-30T07:02:14.714972Z"
+  },
+  "1b7354273c87": {
+    "id": "1b7354273c87",
+    "name": "scanner",
+    "root": "/Users/hoyn/Documents/AndroidWorkplace/Demo/scanner",
+    "remote": "",
+    "created_at": "2026-03-31T00:55:02.121008Z",
+    "last_seen": "2026-03-31T02:06:53.413456Z"
+  },
+  "573449525ebe": {
+    "id": "573449525ebe",
+    "name": "metaself",
+    "root": "/Users/hoyn/Documents/FlutterWorkplace/metaself",
+    "remote": "git@gitee.com:chengdu-xiaochen/metaself.git",
+    "created_at": "2026-03-31T03:09:07.297908Z",
+    "last_seen": "2026-04-13T09:02:51.476850Z"
+  },
+  "ae45349e4b2f": {
+    "id": "ae45349e4b2f",
+    "name": "floatingai",
+    "root": "/Users/hoyn/Documents/AndroidWorkplace/floatingai",
+    "remote": "git@gitee.com:chengdu-xiaochen/floatingai.git",
+    "created_at": "2026-03-31T06:04:48.245205Z",
+    "last_seen": "2026-04-13T02:40:37.102012Z"
+  },
+  "a8f6378ce2b1": {
+    "id": "a8f6378ce2b1",
+    "name": "magicbox",
+    "root": "/Users/hoyn/Documents/AndroidWorkplace/magicbox",
+    "remote": "git@gitee.com:chengdu-xiaochen/magicbox.git",
+    "created_at": "2026-03-31T06:04:48.466082Z",
+    "last_seen": "2026-03-31T06:12:29.061940Z"
+  },
+  "e4c6efdfbe31": {
+    "id": "e4c6efdfbe31",
+    "name": "log-reporting",
+    "root": "/Users/hoyn/Documents/AndroidWorkplace/log-reporting",
+    "remote": "git@gitee.com:chengdu-xiaochen/log-reporting.git",
+    "created_at": "2026-03-31T06:11:53.550903Z",
+    "last_seen": "2026-04-03T09:15:12.041346Z"
+  },
+  "ebb078f5253f": {
+    "id": "ebb078f5253f",
+    "name": "mtorder",
+    "root": "/Users/hoyn/Documents/AndroidWorkplace/mtorder",
+    "remote": "git@gitee.com:chengdu-xiaochen/mtorder.git",
+    "created_at": "2026-03-31T06:11:54.776066Z",
+    "last_seen": "2026-03-31T06:12:34.021998Z"
+  },
+  "743390b48777": {
+    "id": "743390b48777",
+    "name": "Apptheme_Old",
+    "root": "/Users/hoyn/Documents/AndroidWorkplace/Apptheme_Old",
+    "remote": "git@gitee.com:chengdu-xiaochen/Apptheme_Old.git",
+    "created_at": "2026-04-01T03:09:12.283007Z",
+    "last_seen": "2026-04-01T03:16:13.581391Z"
+  },
+  "e45a163c8c6f": {
+    "id": "e45a163c8c6f",
+    "name": "AndroidAutoRemoteSignTool",
+    "root": "/Users/hoyn/Documents/PythonWorkplace/AndroidAutoRemoteSignTool",
+    "remote": "git@gitee.com:chengdu-xiaochen/AndroidAutoRemoteSignTool.git",
+    "created_at": "2026-04-01T03:21:18.146338Z",
+    "last_seen": "2026-04-09T06:29:19.148951Z"
+  },
+  "18943dcfa6b7": {
+    "id": "18943dcfa6b7",
+    "name": "\u5728\u7ebf\u6587\u4ef6\u4e0a\u4f20",
+    "root": "/Users/hoyn/Documents/\u5728\u7ebf\u6587\u4ef6\u4e0a\u4f20",
+    "remote": "git@gitee.com:Hoyn/online-files.git",
+    "created_at": "2026-04-01T07:08:39.879438Z",
+    "last_seen": "2026-04-01T07:09:52.529588Z"
+  },
+  "cbb433bbae02": {
+    "id": "cbb433bbae02",
+    "name": "update-remote-plugins",
+    "root": "/Users/hoyn/Documents/github/claude_skill/plugins/android-dev-tools/skills/update-remote-plugins",
+    "remote": "",
+    "created_at": "2026-04-02T06:41:30.099972Z",
+    "last_seen": "2026-04-02T07:09:39.965854Z"
+  },
+  "acac818ce88d": {
+    "id": "acac818ce88d",
+    "name": "layout",
+    "root": "/Users/hoyn/Documents/AndroidWorkplace/Demo/camera/app/src/main/res/layout",
+    "remote": "",
+    "created_at": "2026-04-03T02:52:24.281271Z",
+    "last_seen": "2026-04-03T02:58:07.737939Z"
+  },
+  "f5a1263bc855": {
+    "id": "f5a1263bc855",
+    "name": "vtalkproto",
+    "root": "/Users/hoyn/Documents/AndroidWorkplace/vtalkproto",
+    "remote": "git@gitee.com:chengdu-xiaochen/vtalkproto.git",
+    "created_at": "2026-04-08T01:36:58.877935Z",
+    "last_seen": "2026-04-08T02:16:18.605437Z"
+  },
+  "ac7cee0e1c7f": {
+    "id": "ac7cee0e1c7f",
+    "name": "lib-asr-flutter",
+    "root": "/Users/hoyn/Documents/FlutterWorkplace/lib-asr-flutter",
+    "remote": "",
+    "created_at": "2026-04-08T05:47:37.028300Z",
+    "last_seen": "2026-04-13T09:33:05.119564Z"
+  },
+  "0f02773fc2c8": {
+    "id": "0f02773fc2c8",
+    "name": "backend",
+    "root": "/Users/hoyn/Documents/FlutterWorkplace/lib-asr-flutter/backend",
+    "remote": "",
+    "created_at": "2026-04-08T06:07:08.374181Z",
+    "last_seen": "2026-04-08T06:08:50.770108Z"
+  },
+  "a1fb7dba13a5": {
+    "id": "a1fb7dba13a5",
+    "name": "example",
+    "root": "/Users/hoyn/Documents/FlutterWorkplace/lib-asr-flutter/example",
+    "remote": "",
+    "created_at": "2026-04-08T06:08:52.193284Z",
+    "last_seen": "2026-04-08T06:10:25.880175Z"
+  },
+  "6e7b11246323": {
+    "id": "6e7b11246323",
+    "name": "tts-text-stream",
+    "root": "/Users/hoyn/Documents/github/cognitive-services-speech-sdk/samples/python/tts-text-stream",
+    "remote": "",
+    "created_at": "2026-04-08T08:15:54.619936Z",
+    "last_seen": "2026-04-08T09:57:36.551068Z"
+  },
+  "7b6eb135628c": {
+    "id": "7b6eb135628c",
+    "name": "tts_ws_python3_demo",
+    "root": "/Users/hoyn/Documents/PythonWorkplace/tts_ws_python3_demo",
+    "remote": "",
+    "created_at": "2026-04-08T08:56:58.604525Z",
+    "last_seen": "2026-04-08T10:10:24.078469Z"
+  },
+  "d6af63797837": {
+    "id": "d6af63797837",
+    "name": "ab13e00e363ec8c271cc3af974de20b3",
+    "root": "/Users/hoyn/Library/Containers/com.tencent.WeWorkMac/Data/Documents/Profiles/CAC73282FA614CB2B34A4A85454E9218/Caches/Files/2026-04/ab13e00e363ec8c271cc3af974de20b3",
+    "remote": "",
+    "created_at": "2026-04-08T10:07:35.975009Z",
+    "last_seen": "2026-04-08T10:07:46.054327Z"
+  },
+  "a80fdf7a1a42": {
+    "id": "a80fdf7a1a42",
+    "name": "toast_demo",
+    "root": "/Users/hoyn/Documents/AndroidWorkplace/common-lib/app/src/main/java/com/hoyn/common/lib/ui/toast_demo",
+    "remote": "",
+    "created_at": "2026-04-09T05:26:38.120444Z",
+    "last_seen": "2026-04-09T05:29:59.289436Z"
+  },
+  "c6dd75acf17b": {
+    "id": "c6dd75acf17b",
+    "name": "ASR\u65b9\u6848",
+    "root": "/Users/hoyn/Documents/FlutterWorkplace/ASR\u65b9\u6848",
+    "remote": "",
+    "created_at": "2026-04-10T04:18:56.977395Z",
+    "last_seen": "2026-04-10T06:34:00.309780Z"
+  },
+  "c0025bc115a8": {
+    "id": "c0025bc115a8",
+    "name": "flutter-asr-lib",
+    "root": "/Users/hoyn/Documents/FlutterWorkplace/flutter-asr-lib",
+    "remote": "git@gitee.com:chengdu-xiaochen/flutter-asr-lib.git",
+    "created_at": "2026-04-14T03:08:52.167180Z",
+    "last_seen": "2026-04-15T03:17:33.498586Z"
+  },
+  "e6ccae7cc2ba": {
+    "id": "e6ccae7cc2ba",
+    "name": "mock-server",
+    "root": "/Users/hoyn/Documents/FlutterWorkplace/flutter-asr-lib/tool/mock-server",
+    "remote": "",
+    "created_at": "2026-04-14T03:45:44.514921Z",
+    "last_seen": "2026-04-14T08:32:37.277777Z"
+  },
+  "51b5d8712f32": {
+    "id": "51b5d8712f32",
+    "name": "example",
+    "root": "/Users/hoyn/Documents/FlutterWorkplace/flutter-asr-lib/example",
+    "remote": "",
+    "created_at": "2026-04-14T06:00:27.136034Z",
+    "last_seen": "2026-04-14T07:16:08.663121Z"
+  },
+  "958b8163da7a": {
+    "id": "958b8163da7a",
+    "name": "terminals",
+    "root": "/Users/hoyn/.cursor/projects/Users-hoyn-Documents-FlutterWorkplace-flutter-asr-lib/terminals",
+    "remote": "",
+    "created_at": "2026-04-14T06:16:38.317764Z",
+    "last_seen": "2026-04-14T06:46:16.283495Z"
+  },
+  "45c51a0cdd58": {
+    "id": "45c51a0cdd58",
+    "name": "github",
+    "root": "/Users/hoyn/Documents/github",
+    "remote": "",
+    "created_at": "2026-04-14T07:12:51.669032Z",
+    "last_seen": "2026-04-14T10:07:51.795187Z"
+  },
+  "78e70234d408": {
+    "id": "78e70234d408",
+    "name": "flutter-claude-skill",
+    "root": "/Users/hoyn/Documents/github/flutter-claude-skill",
+    "remote": "git@github.com:adzcsx2/flutter-claude-skill.git",
+    "created_at": "2026-04-14T07:39:51.236065Z",
+    "last_seen": "2026-04-14T10:25:30.739901Z"
+  },
+  "4057a2e23e9d": {
+    "id": "4057a2e23e9d",
+    "name": "mock-server",
+    "root": "/Users/hoyn/Documents/FlutterWorkplace/flutter-asr-lib/backend/mock-server",
+    "remote": "",
+    "created_at": "2026-04-14T09:29:07.318511Z",
+    "last_seen": "2026-04-14T09:37:24.321802Z"
+  },
+  "b9cc0543322c": {
+    "id": "b9cc0543322c",
+    "name": "dev-tools-skills",
+    "root": "/Users/hoyn/Documents/github/dev-tools-skills",
+    "remote": "git@github.com:adzcsx2/dev-tools-skills.git",
+    "created_at": "2026-04-15T02:49:48.061409Z",
+    "last_seen": "2026-04-15T05:33:40.043400Z"
+  }
+}
