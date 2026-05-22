@@ -1,0 +1,34 @@
+{
+  "claude-plugins-official": {
+    "source": {
+      "source": "github",
+      "repo": "anthropics/claude-plugins-official"
+    },
+    "installLocation": "/Users/hoyn/.claude/plugins/marketplaces/claude-plugins-official",
+    "lastUpdated": "2026-04-15T05:11:22.283Z"
+  },
+  "claude-hud": {
+    "source": {
+      "source": "github",
+      "repo": "jarrodwatts/claude-hud"
+    },
+    "installLocation": "/Users/hoyn/.claude/plugins/marketplaces/claude-hud",
+    "lastUpdated": "2026-03-23T02:25:21.120Z"
+  },
+  "everything-claude-code": {
+    "source": {
+      "source": "git",
+      "url": "https://github.com/affaan-m/everything-claude-code.git"
+    },
+    "installLocation": "/Users/hoyn/.claude/plugins/marketplaces/everything-claude-code",
+    "lastUpdated": "2026-05-22T04:12:17.053Z"
+  },
+  "dev-tools-skills": {
+    "source": {
+      "source": "git",
+      "url": "git@github.com:adzcsx2/dev-tools-skills.git"
+    },
+    "installLocation": "/Users/hoyn/.claude/plugins/marketplaces/dev-tools-skills",
+    "lastUpdated": "2026-05-21T10:20:23.000Z"
+  }
+}

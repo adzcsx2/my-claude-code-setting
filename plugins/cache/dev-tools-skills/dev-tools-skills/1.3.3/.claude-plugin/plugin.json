@@ -1,0 +1,10 @@
+{
+  "name": "dev-tools-skills",
+  "description": "All-in-one development toolkit: universal project init (dt:init), study assistant (dt:study), git push (dt:push), plugin management (dt:update-remote-plugins), code annotation (dt:code-note), Cloudflare tunnel (dt:to-public-cloudflare), project-local skill lifecycle management (dt:project-skills), work report generator (dt:work-report), Android tools (adt:*), and Flutter tools (fdt:*).",
+  "version": "1.3.3",
+  "author": {
+    "name": "adzcsx2",
+    "url": "https://github.com/adzcsx2"
+  },
+  "skills": ["./skills/"]
+}
