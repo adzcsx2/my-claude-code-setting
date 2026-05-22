@@ -28,6 +28,8 @@ TestResults.xml
 # specific runtime state, caches, logs, and disposable artifacts.
 # plans/ may contain sensitive credentials and is excluded from version control
 plans/
+# settings.json contains API keys and other secrets
+settings.json
 .DS_Store
 .agents/
 .last-cleanup
