@@ -57,3 +57,6 @@ plugins/.DS_Store
 plugins/data/
 plugins/install-counts-cache.json
 plugins/installed_plugins.json
+# Plugin runtime files (speed cache, PID markers, etc.)
+plugins/**/.speed-cache.json
+plugins/**/.in_use/
