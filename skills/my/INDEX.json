@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "description": "Machine-readable retrieval index for skills/my/",
+  "generated_at": "2026-05-22",
+  "entries": [
+    {
+      "slug": "universal/skill-description-self-test",
+      "category": "universal",
+      "package_type": "atom",
+      "description": "Validate whether a personal Skill can retrieve itself from its own symptoms and trigger terms.",
+      "trigger_terms": [
+        "self-test",
+        "retrieval miss",
+        "hard to find",
+        "description too vague",
+        "skill cannot retrieve itself"
+      ],
+      "lifecycle": "promoted",
+      "source": "realtime",
+      "context_tier": "tiny",
+      "default_read_next": null
+    },
+    {
+      "slug": "universal/my-skills-retrieval-bootstrap",
+      "category": "universal",
+      "package_type": "capability",
+      "description": "Design or debug the retrieval and staged loading path for the personal my-skills system.",
+      "trigger_terms": [
+        "retrieval bootstrap",
+        "wrong package selected",
+        "prompt injection",
+        "load stages",
+        "retrieval ranking",
+        "my-skills retrieval"
+      ],
+      "lifecycle": "promoted",
+      "source": "realtime",
+      "context_tier": "small",
+      "default_read_next": "PLAYBOOK.md"
+    }
+  ]
+}

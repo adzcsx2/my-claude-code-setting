@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "description": "Machine-readable error fingerprint index for skills/my/",
+  "generated_at": "2026-05-22",
+  "entries": [
+    {
+      "error_fingerprint": "retrieval miss",
+      "normalized_keywords": [
+        "retrieval",
+        "miss",
+        "not found",
+        "cannot find skill"
+      ],
+      "matched_slugs": [
+        "universal/skill-description-self-test",
+        "universal/my-skills-retrieval-bootstrap"
+      ],
+      "confidence_hint": "medium"
+    },
+    {
+      "error_fingerprint": "wrong package selected",
+      "normalized_keywords": [
+        "wrong match",
+        "wrong package",
+        "wrong skill",
+        "retrieval ranking"
+      ],
+      "matched_slugs": [
+        "universal/my-skills-retrieval-bootstrap"
+      ],
+      "confidence_hint": "high"
+    },
+    {
+      "error_fingerprint": "reads too much context",
+      "normalized_keywords": [
+        "context",
+        "too much",
+        "load stages",
+        "over-read"
+      ],
+      "matched_slugs": [
+        "universal/my-skills-retrieval-bootstrap"
+      ],
+      "confidence_hint": "high"
+    }
+  ]
+}
