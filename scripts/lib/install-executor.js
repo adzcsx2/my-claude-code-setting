@@ -91,6 +91,11 @@ const IGNORED_DIRECTORY_NAMES = new Set([
   '.git',
 ]);
 
+const README_EXCLUDED_SOURCE_DIRS = new Set([
+  'commands',
+  'skills',
+]);
+
 function listFilesRecursive(dirPath) {
   if (!fs.existsSync(dirPath)) {
     return [];
@@ -152,8 +157,13 @@ function addRecursiveCopyOperations(operations, options) {
   }
 
   const relativeFiles = listFilesRecursive(sourceDir);
+  const firstSegment = String(options.sourceRelativeDir || '').replace(/\\/g, '/').split('/')[0];
+  const skipReadme = README_EXCLUDED_SOURCE_DIRS.has(firstSegment);
 
   for (const relativeFile of relativeFiles) {
+    if (skipReadme && path.basename(relativeFile) === 'README.md') {
+      continue;
+    }
     const sourceRelativePath = path.join(options.sourceRelativeDir, relativeFile);
     const sourcePath = path.join(options.sourceRoot, sourceRelativePath);
     const destinationRelativePath = typeof options.destinationRelativePathTransform === 'function'
@@ -589,6 +599,15 @@ function createLegacyCompatInstallPlan(options = {}) {
   });
 }
 
+function isReadmeExcludedSource(operation) {
+  if (!operation || !operation.sourceRelativePath) {
+    return false;
+  }
+  const p = String(operation.sourceRelativePath).replace(/\\/g, '/');
+  const firstSegment = p.split('/')[0];
+  return README_EXCLUDED_SOURCE_DIRS.has(firstSegment);
+}
+
 function materializeScaffoldOperation(sourceRoot, operation) {
   if (operation.kind === 'merge-json') {
     return [{
@@ -606,6 +625,7 @@ function materializeScaffoldOperation(sourceRoot, operation) {
     }];
   }
 
+  const readmeExcluded = isReadmeExcludedSource(operation);
   const sourcePath = path.join(sourceRoot, operation.sourceRelativePath);
   if (!fs.existsSync(sourcePath)) {
     return [];
@@ -617,6 +637,9 @@ function materializeScaffoldOperation(sourceRoot, operation) {
 
   const stat = fs.statSync(sourcePath);
   if (stat.isFile()) {
+    if (readmeExcluded && path.basename(operation.sourceRelativePath) === 'README.md') {
+      return [];
+    }
     return [buildCopyFileOperation({
       moduleId: operation.moduleId,
       sourcePath,
@@ -628,7 +651,13 @@ function materializeScaffoldOperation(sourceRoot, operation) {
 
   const relativeFiles = listFilesRecursive(sourcePath).filter(relativeFile => {
     const sourceRelativePath = path.join(operation.sourceRelativePath, relativeFile);
-    return !isGeneratedRuntimeSourcePath(sourceRelativePath);
+    if (isGeneratedRuntimeSourcePath(sourceRelativePath)) {
+      return false;
+    }
+    if (readmeExcluded && path.basename(relativeFile) === 'README.md') {
+      return false;
+    }
+    return true;
   });
   return relativeFiles.map(relativeFile => {
     const sourceRelativePath = path.join(operation.sourceRelativePath, relativeFile);

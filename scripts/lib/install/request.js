@@ -133,7 +133,17 @@ function normalizeInstallRequest(options = {}) {
   }
 
   if (!options.help && !hasManifestBaseSelection && legacyLanguages.length === 0) {
-    throw new Error('No install profile, module IDs, included components, or legacy languages were provided');
+    // Default to full profile overwrite install
+    return {
+      mode: 'manifest',
+      target: 'claude',
+      profileId: 'full',
+      moduleIds: [],
+      includeComponentIds: [],
+      excludeComponentIds: [],
+      legacyLanguages: [],
+      configPath: options.configPath || null,
+    };
   }
 
   return {
