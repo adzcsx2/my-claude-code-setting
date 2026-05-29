@@ -19,3 +19,4 @@ This file is mechanically rebuilt. Do not hand-edit rows.
 |---|---|---|---|---|---|
 | `universal/skill-description-self-test` | `universal` | `atom` | `promoted` | `realtime` | Validate whether a Skill can retrieve itself from its own symptoms and trigger terms. |
 | `universal/my-skills-retrieval-bootstrap` | `universal` | `capability` | `promoted` | `realtime` | Design or debug retrieval ranking and staged loading for the `my-skills` system. |
+| `android/kotlin-companion-object-duplicate-class` | `android` | `atom` | `promoted` | `realtime` | Diagnose and fix kapt duplicate-class errors from multiple companion objects in a Kotlin class. |

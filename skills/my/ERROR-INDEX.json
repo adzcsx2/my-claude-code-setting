@@ -42,6 +42,21 @@
         "universal/my-skills-retrieval-bootstrap"
       ],
       "confidence_hint": "high"
+    },
+    {
+      "error_fingerprint": "duplicate class",
+      "normalized_keywords": [
+        "duplicate class",
+        "kapt",
+        "companion object",
+        "duplicate-class",
+        "kaptDebugKotlin",
+        "build failed"
+      ],
+      "matched_slugs": [
+        "android/kotlin-companion-object-duplicate-class"
+      ],
+      "confidence_hint": "high"
     }
   ]
 }

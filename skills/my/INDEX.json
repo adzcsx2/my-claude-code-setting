@@ -37,6 +37,25 @@
       "source": "realtime",
       "context_tier": "small",
       "default_read_next": "PLAYBOOK.md"
+    },
+    {
+      "slug": "android/kotlin-companion-object-duplicate-class",
+      "category": "android",
+      "package_type": "atom",
+      "description": "Diagnose and fix kapt duplicate-class errors caused by multiple companion object declarations in a single Kotlin class.",
+      "trigger_terms": [
+        "duplicate class",
+        "kapt",
+        "companion object",
+        "duplicate-class",
+        "kaptDebugKotlin",
+        "build error",
+        "duplicate companion"
+      ],
+      "lifecycle": "promoted",
+      "source": "realtime",
+      "context_tier": "small",
+      "default_read_next": "PLAYBOOK.md"
     }
   ]
 }
