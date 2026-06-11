@@ -68,9 +68,8 @@ function generateEvidence(skillFile, preHead, preDiffFile) {
   }
   content += '\n' + '='.repeat(70) + '\n【执行证据】本轮 Skill 执行产生的变更\n' + '='.repeat(70) + '\n\n';
   content += isInGitRepo() ? generateDeltaDiff(preHead, preDiffFile) : '（非 git 环境，无法生成 diff）\n';
-  const targetFile = evidenceFile || EVIDENCE_FILE;
-  try { fs.writeFileSync(targetFile, content, 'utf8'); } catch (_) { return ''; }
-  return targetFile;
+  try { fs.writeFileSync(EVIDENCE_FILE, content, 'utf8'); } catch (_) { return ''; }
+  return EVIDENCE_FILE;
 }
 
 // ── 提示词构建 ────────────────────────────────────────────
@@ -138,7 +137,7 @@ function buildAuditInstruction(state, evidenceFile) {
     '',
     '- verdict = "FAIL" 或 "PARTIAL"（存在 CRITICAL/HIGH MISSED 项）',
     '  → 修复所有 MISSED 项',
-    '  → 更新状态文件，status 保持 "AUDITING"',
+    '  → 更新状态文件：status 保持 "AUDITING", **loopCount 加 1**（这是重新审计的信号）',
     '  → **重新回到步骤 1**（新 Agent 实例，零上下文污染）',
     '',
     '**步骤 3: 不可修复时**',
@@ -200,19 +199,19 @@ function run(rawInput) {
   }
 
   // ── AUDITING → 重新审计或强制终止 ──
+  // loopCount 由 Claude 递增（修复完成后 +1），注入器检测递增信号
   if (state.status === 'AUDITING') {
-    // 硬截断
+    // 硬截断（JS 强制，不信任 LLM）
     if (state.loopCount >= MAX_LOOPS) {
       return { exitCode: 0, additionalContext: buildTerminateInstruction(state) };
     }
 
-    // ★ 去重核心: 本循环已注入过，跳过
+    // ★ 去重核心: loopCount 未变 = 已注入过本轮, 跳过
     if (state.loopCount === state.lastInjectedLoop) {
       return { exitCode: 0 };
     }
 
-    // 需要新的审计轮次（Claude 已修复并重新标记为 AUDITING）
-    state.loopCount += 1;
+    // Claude 增加了 loopCount → 新的审计轮次
     if (state.evidenceFile && fs.existsSync(state.evidenceFile)) {
       try { fs.unlinkSync(state.evidenceFile); } catch (_) {}
     }
