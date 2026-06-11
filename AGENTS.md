@@ -157,9 +157,62 @@ rules/           — Always-follow guidelines (common + per-language)
 scripts/         — Cross-platform Node.js utilities
 mcp-configs/     — 14 MCP server configurations
 tests/           — Test suite
+docs/            — Documentation (plan/, architecture/, business/, guide/, modules/, references/, checklist/, reports/)
 ```
 
 `commands/` remains in the repo for compatibility, but the long-term direction is skills-first.
+
+## Single Sources of Truth
+
+- Build, dependencies, scripts: `package.json` (yarn@4.9.2, Node.js >=18)
+- Module list: `package.json` `files` field
+- Project rules: `CLAUDE.md`, `AGENTS.md`, `.claude/rules/`
+- Directory structure: filesystem scan; code over docs when they conflict
+- Canonical skills: `.ai/skills/` is the sole source; never hand-edit `.claude/skills/` or other exports
+- Configured mirrors: recorded in `.ai/README.md`
+
+## Coding Conventions
+
+**Reuse-first:** Search for existing implementations before writing new code. Prefer minimal diffs — no unrelated refactoring or bulk formatting.
+
+**File-touch discipline:** Only modify files directly related to the task. Do not overwrite user changes that predate the current task.
+
+**Plan triggers:** Plan before acting when a task touches 3+ source files, crosses module boundaries, adds dependencies, changes public APIs or data models, or has unclear requirements.
+
+**AI vibe coding:** Keep source files <=500 lines; one responsibility per file. Never append unrelated logic to an already-large file. Do not refactor untouched legacy code just to meet limits.
+
+**Verification:** Run `node tests/run-all.js` after changes. Lint with `npm run lint`. If no verification command applies, state `not verified`.
+
+**Commit format:** `<type>: <description>` — Types: feat, fix, refactor, docs, test, chore, perf, ci. No AI attribution lines in commit messages.
+
+## Copilot Config Exclusivity
+
+This project uses `AGENTS.md` as the Copilot project-level config. Do not maintain both `AGENTS.md` and `.github/copilot-instructions.md` simultaneously — `AGENTS.md` takes precedence.
+
+## Documentation Rules
+
+- Default docs root: `/docs`
+- Categories: `plan/`, `business/` (product), `architecture/` (design), `guide/`, `modules/`, `references/`, `checklist/`, `reports/`
+- New docs go under `/docs`; check for semantic-equivalent directories first
+- Multi-doc work items aggregate under `docs/plan/<task-slug>/`
+- Audit / performance / evaluation / postmortem reports use `docs/reports/<report-topic>/`
+- `CHANGELOG.md` stays at repo root
+
+## Project-Level Skills
+
+- `.ai/skills/` is the canonical source for project skills
+- Edit only `.ai/skills/`; `.claude/hooks/sync-project-skills.sh` handles mirror refresh to `.claude/skills/`
+- "Summarize into a skill" workflow: duplicate-check -> overlap-check -> proposal -> confirm -> write
+
+## Common Commands
+
+| Command | Purpose |
+|---------|---------|
+| `node tests/run-all.js` | Run all unit tests |
+| `npm test` | Full CI check (validation + catalog + tests) |
+| `npm run lint` | ESLint + markdownlint |
+| `npm run coverage` | c8 coverage (80% threshold) |
+| `npx ecc <type>` | Install ECC rules for a tech stack |
 
 ## Success Metrics
 
