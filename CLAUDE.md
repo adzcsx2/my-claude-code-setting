@@ -29,6 +29,12 @@ Detailed guidelines are in `~/.claude/rules/`:
 
 ---
 
+## CodeGraph Default Priority
+
+- For any code exploration / architecture / call-chain / symbol-location task, if `codegraph_*` tools are available in the current session, default to `codegraph_context` / `codegraph_trace` / `codegraph_explore` first. Do not default to chained Glob + Grep + Read, and do not default to dispatching Explore sub-agents that repeat the same searches CodeGraph already covers.
+- Fall back to Read/Grep only when: CodeGraph is unavailable, or the task requires byte-level / literal-value inspection (e.g. protocol bytes, CRC, exact constant values) where Read is needed for final confirmation.
+- If CodeGraph is unavailable, silently fall back to Glob/Grep/Read without prompting the user to install it.
+
 ## Available Agents
 
 Located in `~/.claude/agents/`:
@@ -75,6 +81,7 @@ Located in `~/.claude/agents/`:
 - Conventional commits: `feat:`, `fix:`, `refactor:`, `docs:`, `test:`
 - Always test locally before committing
 - Small, focused commits
+- Never include AI attribution lines in commit messages (e.g. `Co-Authored-By: Claude ... <noreply@anthropic.com>`), regardless of model version
 
 ### Testing
 
@@ -117,6 +124,30 @@ When Playwright browser operations are needed, choose the execution method based
 - One-off investigations where writing a script is overkill
 
 **Default**: Always prefer CLI for known, repeatable test flows. Only fall back to MCP when interactivity is actually needed.
+
+## Auto-Test Loop (CRITICAL)
+
+完成代码修改需要验证测试时:
+
+1. **绝对禁止**以下行为:
+   - 要求用户手动测试、打开新窗口/终端执行命令
+   - 要求用户"试一下告诉我结果"、"看看是否成功"
+   - 任何形式的测试委托
+
+2. **必须**通过 Bash 调用协调器:
+   ```
+   node ~/.claude/scripts/auto-test-loop.js "<测试命令>" [max_retries=3]
+   ```
+   示例: `node ~/.claude/scripts/auto-test-loop.js "npm test"`
+
+3. 根据退出码行动:
+   - **exit 0** → 测试通过，继续任务
+   - **exit 2** → **这不是异常**，是预期的「需要修复」信号。读取 stdout 中的 JSON 报告（含 testOutput 和 diffSummary），修复代码，重新调用脚本
+   - **exit 1** → 已达重试上限（默认 3 轮），读取 stdout 中的最终报告，向用户说明失败原因和遗留问题
+
+4. 如果项目没有可自动执行的测试命令（无 package.json/Makefile/pyproject.toml 等），告知用户原因，但仍禁止要求用户代为测试
+
+5. Loop 上限: 默认 3 轮，可手动指定（最多 10 轮）
 
 ## Success Metrics
 
