@@ -1,4 +1,4 @@
-﻿---
+---
 name: dt:study
 description: "Capture one verified root cause back into the current workspace source skill, keep rule updates minimal, and avoid cached copies and hardcoded paths."
 argument-hint: "[target-skill] [issue-summary]"

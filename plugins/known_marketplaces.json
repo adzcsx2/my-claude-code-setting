@@ -21,7 +21,7 @@
       "url": "https://github.com/affaan-m/everything-claude-code.git"
     },
     "installLocation": "/Users/hoyn/.claude/plugins/marketplaces/everything-claude-code",
-    "lastUpdated": "2026-05-29T09:51:08.761Z"
+    "lastUpdated": "2026-06-11T16:02:30.856Z"
   },
   "anthropic-agent-skills": {
     "source": {
@@ -37,6 +37,6 @@
       "url": "git@github.com:adzcsx2/dev-tools-skills.git"
     },
     "installLocation": "/Users/hoyn/.claude/plugins/marketplaces/dev-tools-skills",
-    "lastUpdated": "2026-05-26T05:10:55.000Z"
+    "lastUpdated": "2026-06-08T07:50:19.000Z"
   }
 }

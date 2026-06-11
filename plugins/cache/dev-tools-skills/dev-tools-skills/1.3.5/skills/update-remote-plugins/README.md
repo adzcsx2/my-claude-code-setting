@@ -9,7 +9,7 @@
 - 审计受影响 skill 的 SKILL.md 与 README.md 是否一致
 - 同步 README.md、README_EN.md、plugin.json、marketplace.json
 - 校验 install.sh 与 install.ps1 是否先清理旧缓存和旧注册，再安装最新版本
-- 提交并推送远程，然后通过 install 脚本**强制刷新本地 Claude 缓存**
+- 提交并推送远程，然后通过 install 脚本**强制刷新本地缓存**（脚本自动检测 Claude/Copilot 安装状态）
 
 ## 用法
 

@@ -123,11 +123,11 @@ git push
 
 如果 push 被拒绝，先 rebase 再继续。
 
-### 7. Refresh Local Claude Via Install (强制执行)
+### 7. Refresh Local Via Install (强制执行)
 
 **这是必须执行的最后一步，不得跳过。**
 
-推送远程后，本地只通过安装脚本刷新，不允许手动复制 cache 文件。
+推送远程后，本地只通过安装脚本刷新。install 脚本已内置自动检测逻辑，会根据当前环境中的 Claude Code 和 VS Code Copilot 安装状态自动选择安装目标。
 
 macOS / Linux:
 
@@ -141,19 +141,10 @@ Windows PowerShell:
 .\install.ps1 -All
 ```
 
-如需显式清理，也可以先执行：
-
-```bash
-./uninstall.sh
-./install.sh --all
-```
-
-或：
-
-```powershell
-.\uninstall.ps1
-.\install.ps1 -All
-```
+安装脚本会自动：
+- 检测 `~/.claude/` 是否存在 → 安装 Claude Code skills
+- 检测 VS Code prompts 目录是否存在 → 安装 Copilot prompts
+- 都有则都安装，都没有则跳过
 
 **执行要求**：
 - 必须在 push 成功后立即执行 install 脚本

@@ -25,25 +25,7 @@ applyTo: "**/*.kt, **/AndroidManifest.xml, **/build.gradle*"
 |------|------|
 | `android-device-automation` skill | 已通过 `npx skills add web-infra-dev/midscene-skills` 安装 |
 | ADB 设备 | `adb devices` 至少有一个 `device` |
-| Midscene 模型 | 默认使用 OpenRouter + Qwen3.6 Plus（见下方模型配置） |
-
-## 模型配置
-
-**默认模型**：OpenRouter Qwen3.6 Plus (free)，100 万上下文，多模态 VLM。
-
-在 `~/.zshrc` 中配置以下环境变量：
-
-```bash
-# Midscene Configuration - OpenRouter Qwen3.6 Plus
-export MIDSCENE_MODEL_NAME="qwen/qwen3.6-plus"
-export MIDSCENE_MODEL_BASE_URL="https://openrouter.ai/api/v1"
-export MIDSCENE_MODEL_API_KEY="<your-openrouter-api-key>"
-export MIDSCENE_MODEL_FAMILY="qwen3.6"
-```
-
-配置后执行 `source ~/.zshrc` 使环境变量生效。
-
-> **注意**：首次使用若未检测到以上环境变量，应主动提示用户在 `~/.zshrc` 中添加上述配置段，然后 `source ~/.zshrc`。
+| Midscene 模型 | `~/.zshrc` 中已配置 `MIDSCENE_MODEL_*` 环境变量 |
 
 ## 执行流程
 
@@ -145,7 +127,7 @@ cp <screenshot-path> docs/screens/<descriptive-name>.png
 | Device not listed | 检查 USB 连接，启用 USB 调试 |
 | Device "unauthorized" | 设备上接受 USB 调试授权 |
 | Device "offline" | `adb kill-server && adb start-server` |
-| 401 auth error | 检查 OpenRouter API Key: `echo $MIDSCENE_MODEL_API_KEY` |
+| 401 auth error | 检查 `~/.zshrc` 中 `MIDSCENE_MODEL_API_KEY` |
 | Command timeout | 唤醒设备: `adb shell input keyevent KEYCODE_WAKEUP` |
 | `@midscene/android` not found | `npx -y @midscene/android@1 connect`（加 `-y` 跳过确认） |
 | 多设备冲突 | `connect --deviceId <id>` 指定设备 |

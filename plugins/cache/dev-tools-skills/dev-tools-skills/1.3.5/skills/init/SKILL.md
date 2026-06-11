@@ -66,7 +66,8 @@ origin: dev-tools-skills
 5. `.ai/README.md`、`.ai/skills/registry.yml`、`.ai/skills/.updates/`、`.ai/skills/project-skills/SKILL.md`
 6. （仅当前环境为 Claude Code，或用户明确要求 Claude 项目自动化时）`.claude/settings.json` 与 `.claude/hooks/sync-project-skills.sh`
 7. `/docs` 文档根目录及必要分类目录骨架
-8. 可选 checklist（仅用户明确要求时）
+8. （仅当项目有真实关注点或明确隔离价值时）按主题拆分的 `.ai/rules/<topic>.md` 与 `src/` / `tests/` 等目录级隔离规则
+9. 可选 checklist（仅用户明确要求时）
 
 ## Mandatory Read Order
 
@@ -77,7 +78,8 @@ origin: dev-tools-skills
 3. `references/docs-taxonomy.md`
 4. `references/project-bootstrap.md`
 5. `references/claude-hook-bootstrap.md`
-6. `references/output-files.md`
+6. `references/scoped-rules-and-enforcement.md`
+7. `references/output-files.md`
 
 按条件追加读取：
 
@@ -95,6 +97,16 @@ origin: dev-tools-skills
 - 如果 reference 与旧版项目规则冲突，按 reference + 真实代码做增量升级，不要直接跳过
 
 ## Execution Workflow
+
+### Step 0. CodeGraph Auto-Init (run first)
+
+在开始任何侦察或文件生成之前，必须先检查并初始化 CodeGraph：
+
+- 检测本机是否安装了 `codegraph` CLI（执行 `which codegraph` 或 `codegraph` 可用性检查）
+- 检测项目根目录下是否已存在 `.codegraph/` 文件夹
+- 当本机已安装 `codegraph` 且项目不存在 `.codegraph/` 时，自动执行 `codegraph init -i` 初始化索引
+- 如果 `codegraph` 未安装或 `.codegraph/` 已存在，静默跳过
+- 此步骤的执行结果应反映在 onboarding 摘要中（标明 CodeGraph 是否已初始化或跳过）
 
 ### Step 1. Parse Mode
 
@@ -132,14 +144,25 @@ origin: dev-tools-skills
 - bootstrap 项目内 `project-skills` 元 skill
 - 如果适用，再按 `references/claude-hook-bootstrap.md` 生成 Claude project hook
 
-### Step 7. Experimental Flow
+### Step 7. Scoped Rules And Enforcement
+
+- 按 `references/scoped-rules-and-enforcement.md` 规划规则模块化与强制层
+- 评估是否需要把规则按主题拆到 `.ai/rules/<topic>.md`，主控文件只保留红线 + 索引（SR-2）
+- 评估是否需要在 `src/` 与 `tests/` 等真实目录边界生成目录级隔离规则，防止 Mock 渗透生产代码（SR-3）
+- 检测项目已有的 Linter / 静态检查工具，优先增量补充依赖边界规则；不擅自引入新工具（SR-4）
+- 准备把“接口 -> 确认 -> 业务 -> 测试”分步工作流写入后续规则文件（SR-5）
+- 按 Step 3/4 侦察到的栈，生成对应的依赖注入隔离规则（SR-8）与集成测试反 Mock / 环境防呆规则（SR-9）
+- SR-8 / SR-9 必须栈感知 + 条件生成：只写侦察到的栈那一套，侦察不到外部依赖就不写 DI，无测试栈就只建议；禁止跨栈套用写法
+- 任何对 Linter / 构建配置的改动都先走 Plan-First 预览；带 `--dry-run` 时只输出预览
+
+### Step 8. Experimental Flow
 
 - 仅在显式传入 `--experiment` 时执行
 - 必须先读 `references/experimental-mode.md`
 - 先给 dry-run 预览，再决定是否落盘
 - 只在该 reference 允许的范围内做结构改动
 
-### Step 8. Generate Output Files
+### Step 9. Generate Output Files
 
 - 按 `references/output-files.md` 生成或增量升级：
   - `CLAUDE.md`
@@ -147,12 +170,36 @@ origin: dev-tools-skills
   - Copilot 项目级配置
   - onboarding 摘要
   - 可选 checklist
+- 同时落实 `references/scoped-rules-and-enforcement.md` 的产出：模块化规则索引、目录级隔离规则、Linter 强制说明、分步工作流段落
 
-### Step 9. Minimal Verification
+### Step 10. Minimal Verification
 
 - 优先运行与改动范围最小相关的 test / lint / typecheck / build / smoke
 - 如果没有可执行验证命令，必须明确写 `not verified`
 - 文档-only 变更至少检查路径、目录规则和规则文件一致性
+
+### Step 11. Code Review Generated Rules
+
+在所有文件生成和验证完成后，对产出的规则文件做一次完整性审查：
+
+- 检查 `CLAUDE.md` 是否完整覆盖了 `references/output-files.md` 要求的 19 项必备内容（其中 SR 相关项按本项目栈裁剪）
+- 检查 `AGENT.md` 是否完整覆盖了 8 项必备内容
+- 检查 Copilot 项目级配置是否涵盖精简版 GP-2 至 GP-9
+- 交叉检查各文件之间的一致性（单一事实来源声明、skill canonical 规则、文档分类规则是否在各文件中一致）
+- 检查是否有遗漏的规则类别：安全、测试、编码风格、Git 工作流、性能、Agent 编排、Hook 系统
+- 对照 `references/general-principles.md` 的 GP-1 至 GP-10，逐项确认关键约束已写入对应文件
+- 对照 `references/scoped-rules-and-enforcement.md` 的 SR-1 至 SR-9，确认模块化规则索引、目录级隔离、Linter 强制说明、分步工作流、依赖注入隔离、集成测试与环境防呆已按本项目栈裁剪写入对应文件；确认没有跨栈套用错误写法
+- 发现缺失或冲突时，补充或修正对应文件
+- 输出一份简短的 review 结论到会话中：列出已覆盖的规则类别、发现的 gap 及是否已修复
+
+### Step 12. Add .codegraph to .gitignore
+
+在所有文件生成和 review 完成后，确保 `.codegraph/` 已加入项目的 `.gitignore`：
+
+- 检查项目根目录是否存在 `.gitignore` 文件，如果不存在则创建
+- 检查 `.gitignore` 中是否已有 `.codegraph/` 条目
+- 如果没有，在 `.gitignore` 末尾追加 `.codegraph/`（前面保留一个空行作为分隔）
+- 如果 Step 0 中未初始化 CodeGraph（未安装或已存在），此步骤仍要执行 — 确保仓库在任何情况下都不会将 codegraph 索引目录提交到版本控制
 
 ## Minimum Rules Generated Files Must Carry
 
@@ -166,6 +213,12 @@ origin: dev-tools-skills
 - `CHANGELOG.md` 这类持续更新日志可保留在 `docs/reports/` 根下
 - 需求不清或跨 3+ 源码文件时先计划
 - 所有结论必须来自真实代码、配置或目录扫描
+- 规则按主题模块化，主控文件只保留红线 + 索引，细则按需加载
+- 生产代码目录禁止 Mock，测试目录允许 Mock，按目录边界做物理隔离
+- 哪些依赖 / import 边界由 Linter / 静态检查强制（仅记录项目已采用或用户要求的方案）
+- 后续 AI coding 遵循接口 -> 确认 -> 业务 -> 测试 的分步工作流
+- 外部依赖经接口 / 注入隔离，业务函数内禁止直接实例化或发真实请求（按本项目栈裁剪，侦察不到外部依赖则不写）
+- 单元测试外补集成测试（禁用 Mock）与负面边界测试，Mock 用环境判断包裹防呆（按本项目栈选写法，禁止跨栈套用）
 
 ## Best Practices
 
@@ -184,3 +237,8 @@ origin: dev-tools-skills
 - 把审计 / 性能 / 评估 / 复盘类报告直接平铺到 `docs/reports/`
 - 把 `.claude/skills/`、`.ai/exports/` 当作事实源直接修改
 - 未完成最小验证就宣称已通过
+- 把所有规则塞进单个超长 `CLAUDE.md`，不做模块化与索引
+- 擅自引入项目尚未采用的新 Linter / IDE 规则机制，而非增量补充已有工具
+- 在每个子目录无脑塞规则文件，或为不存在的关注点创建空 `.ai/rules/<topic>.md`
+- 跨栈套用强制写法（如给 Flutter 项目写 `process.env`、给 React 写 `kReleaseMode`、给纯 UI 库强加 DI）
+- 给侦察不到外部依赖的项目强加依赖注入规则，或给无测试栈的项目强制集成测试

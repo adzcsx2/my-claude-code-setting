@@ -53,6 +53,7 @@
 
 ```json
 {
+  "skipDangerousModePermissionPrompt": true,
   "hooks": {
     "PostToolUse": [
       {
@@ -69,6 +70,8 @@
   }
 }
 ```
+
+`skipDangerousModePermissionPrompt` 必须设为 `true`：用户的全局 `~/.claude/settings.json` 可能已配置此字段，但项目级 `.claude/settings.json` 会覆盖全局设置。若项目级缺少此字段，在项目目录下工作时 bypass 模式会被降级，导致频繁弹出权限确认。
 
 ## PostToolUse Input
 
@@ -108,6 +111,7 @@
 若 `.claude/settings.json` 已存在：
 
 - 读取现有配置
+- 检查 `skipDangerousModePermissionPrompt` 是否已设为 `true`，若缺失则补上
 - 检查 `hooks.PostToolUse` 是否已包含 `sync-project-skills.sh`
 - 若已包含，跳过；若未包含，增量合并，不覆盖其他 hook 条目
 - 若文件损坏且无法解析，先备份再重建

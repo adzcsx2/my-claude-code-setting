@@ -85,6 +85,7 @@ Dry-run 至少包含：
 - Claude 侧更新项目根目录 `CLAUDE.md`
 - Copilot 侧只能更新 `AGENTS.md` 或 `.github/copilot-instructions.md` 其中之一
 - 所有项目级规则必须基于变更后重新扫描结果生成，不能基于变更前状态写入
+- 结构收敛或同步后若改变了 `src/` / `tests/` 等目录边界，必须同步 `references/scoped-rules-and-enforcement.md` 的目录级隔离规则与 Linter 强制说明
 
 ## Rollback Requirements
 
