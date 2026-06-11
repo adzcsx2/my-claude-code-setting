@@ -2,14 +2,12 @@
 'use strict';
 
 /**
- * stop-skill-audit.js — Stop hook, 仅负责检测 Skill 调用并创建审计状态文件
+ * stop-skill-audit.js — Stop hook, 检测层 v3
  *
- * Claude Code 限制: Stop hook 不支持 hookSpecificOutput.additionalContext。
- * 因此本 hook 只做两件事:
- *   1. 扫描 transcript 检测本轮是否使用了 Skill tool
- *   2. 如检测到 → 写入 skill-audit-state.json (NOT_AUDITED)
- *
- * 实际的审计指令注入由 post-audit-injector.js (PostToolUse hook, matcher: *) 负责。
+ * v3 修复:
+ *   - 独立游标文件 skill-audit-cursor.json, 记录每个 transcript 的已扫描位置
+ *   - 只扫描游标之后的新增内容, 避免重复检测旧 Skill 调用
+ *   - 检测到 Skill 后写入 state 文件 (由 post-audit-injector.js 消费)
  */
 
 const fs = require('fs');
@@ -19,20 +17,51 @@ const { execFileSync } = require('child_process');
 const HOME = require('os').homedir();
 const SESSION_DATA_DIR = path.join(HOME, '.claude', 'session-data');
 const STATE_FILE = path.join(SESSION_DATA_DIR, 'skill-audit-state.json');
+const CURSOR_FILE = path.join(SESSION_DATA_DIR, 'skill-audit-cursor.json');
 const SCAN_MAX_BYTES = 2 * 1024 * 1024;
 
+// ── 游标读写 ──────────────────────────────────────────────
+
+function readCursors() {
+  if (!fs.existsSync(CURSOR_FILE)) return {};
+  try { return JSON.parse(fs.readFileSync(CURSOR_FILE, 'utf8')); } catch { return {}; }
+}
+
+function writeCursors(cursors) {
+  try { fs.writeFileSync(CURSOR_FILE, JSON.stringify(cursors), 'utf8'); } catch {}
+}
+
+// 清理超过 24h 未更新的游标（避免泄漏）
+function pruneCursors(cursors) {
+  const now = Date.now();
+  const oneDay = 24 * 60 * 60 * 1000;
+  const pruned = {};
+  for (const key of Object.keys(cursors)) {
+    const entry = cursors[key];
+    if (typeof entry === 'object' && entry.ts && (now - entry.ts) < oneDay) {
+      pruned[key] = entry;
+    } else if (typeof entry === 'number') {
+      // 兼容旧格式（纯数字 offset），迁移为新格式
+      pruned[key] = { offset: entry, ts: now };
+    }
+  }
+  return pruned;
+}
+
+// ── Git ────────────────────────────────────────────────────
+
+let _inGitRepo = null;
 function isInGitRepo() {
-  try {
-    execFileSync('git', ['rev-parse', '--git-dir'], { stdio: 'ignore' });
-    return true;
-  } catch { return false; }
+  if (_inGitRepo !== null) return _inGitRepo;
+  try { execFileSync('git', ['rev-parse', '--git-dir'], { stdio: 'ignore' }); _inGitRepo = true; } catch { _inGitRepo = false; }
+  return _inGitRepo;
 }
 
 function getGitHead() {
-  try {
-    return execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8', timeout: 5000 }).trim();
-  } catch { return ''; }
+  try { return execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8', timeout: 5000 }).trim(); } catch { return ''; }
 }
+
+// ── Skill 文件搜索 ────────────────────────────────────────
 
 function findSkillFile(skillName) {
   const candidates = [
@@ -44,25 +73,36 @@ function findSkillFile(skillName) {
   if (skillName.startsWith('ecc:')) {
     candidates.push(path.join(HOME, '.claude', 'commands', 'ecc', skillName.slice(4) + '.md'));
   }
-  for (const c of candidates) {
-    if (fs.existsSync(c)) return c;
-  }
+  for (const c of candidates) { if (fs.existsSync(c)) return c; }
   return '';
 }
 
-function detectSkillFromTranscript(transcriptPath) {
+// ── Transcript 扫描 (仅扫描游标之后的新增内容) ───────────
+
+function detectNewSkillInTranscript(transcriptPath, lastOffset) {
   if (!transcriptPath || !fs.existsSync(transcriptPath)) return null;
+
+  let stat;
+  try { stat = fs.statSync(transcriptPath); } catch { return null; }
+
+  // 无新内容
+  if (stat.size <= lastOffset) return null;
+
+  // 只读取新增部分
+  const readStart = Math.min(lastOffset, stat.size);
+  const readSize = Math.min(stat.size - readStart, SCAN_MAX_BYTES);
+  if (readSize <= 0) return null;
+
   let content;
   try {
-    const stat = fs.statSync(transcriptPath);
-    const start = Math.max(0, stat.size - SCAN_MAX_BYTES);
     const fd = fs.openSync(transcriptPath, 'r');
-    const buf = Buffer.alloc(stat.size - start);
-    fs.readSync(fd, buf, 0, buf.length, start);
+    const buf = Buffer.alloc(readSize);
+    fs.readSync(fd, buf, 0, readSize, readStart);
     fs.closeSync(fd);
     content = buf.toString('utf8');
   } catch { return null; }
 
+  // 从后往前扫描新增内容中的 Skill 调用
   const lines = content.split('\n');
   for (let i = lines.length - 1; i >= 0; i--) {
     const line = lines[i].trim();
@@ -79,10 +119,14 @@ function detectSkillFromTranscript(transcriptPath) {
       }
     } catch {}
   }
+
   return null;
 }
 
+// ── 主入口 ────────────────────────────────────────────────
+
 function run(rawInput) {
+  // 解析 Stop 事件
   let transcriptPath = '';
   try {
     const input = JSON.parse(rawInput);
@@ -90,20 +134,36 @@ function run(rawInput) {
       transcriptPath = input.transcript_path;
     }
   } catch { return { exitCode: 0 }; }
-
   if (!transcriptPath) return { exitCode: 0 };
 
-  const detected = detectSkillFromTranscript(transcriptPath);
+  // 读取并清理游标
+  let cursors = pruneCursors(readCursors());
+  const cursorEntry = cursors[transcriptPath];
+  const lastOffset = (typeof cursorEntry === 'object' && cursorEntry.offset != null) ? cursorEntry.offset : 0;
+
+  // 只扫描新增部分
+  const detected = detectNewSkillInTranscript(transcriptPath, lastOffset);
+
+  // ★ 无论是否检测到 Skill，都更新游标（不再重扫已读区域）
+  const newOffset = (() => {
+    try { return fs.statSync(transcriptPath).size; } catch { return lastOffset; }
+  })();
+  cursors[transcriptPath] = { offset: newOffset, ts: Date.now() };
+  writeCursors(cursors);
+
+  // 未检测到新 Skill → 静默
   if (!detected) return { exitCode: 0 };
 
+  // 检测到新 Skill → 创建审计状态
   const skillFile = findSkillFile(detected.skillName);
-  const preHead = getGitHead();
+  const preHead = isInGitRepo() ? getGitHead() : '';
 
   const state = {
     skill: detected.skillName,
     skillFile: skillFile,
     status: 'NOT_AUDITED',
     loopCount: 0,
+    lastInjectedLoop: 0,
     preHead: preHead,
     preDiffFile: '',
     evidenceFile: '',
@@ -118,6 +178,8 @@ function run(rawInput) {
 
   return { exitCode: 0 };
 }
+
+// ── Hook 入口 ─────────────────────────────────────────────
 
 if (require.main === module) {
   let raw = '';
